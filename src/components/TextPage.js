@@ -20,7 +20,7 @@ class TextPage extends Component {
 
     render() {
         return(
-            <div>
+            <div className="container">
                 TextPage
                 <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
                     <FormControl>
