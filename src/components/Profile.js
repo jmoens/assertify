@@ -33,7 +33,7 @@ class Profile extends Component {
                 <div className="card deep-purple lighten-4">
                     <h4 className="center-align">Profile</h4>
                     <p>
-                        <span className="bold">Name:</span> {this.state.name}
+                        <span className="bold">Name:</span> {this.state.fullName}
                     </p>
                     <p>
                     <span className="bold">UserName:</span> {this.state.userName}
