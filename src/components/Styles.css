@@ -11,6 +11,11 @@
     border: 0;
     box-shadow: none;
 }
+.underline{
+    height: 4px;
+    padding: 0px;
+}
+
 .textboxYellow {
     border-style: solid;
     border-width: thick;
@@ -40,6 +45,8 @@
 .logo {
     width: 180.5px;
     height: 45.5px;
+    /* margin-left: 50px;
+    margin-top: 15px; */
 }
 
 .linkTitle {
@@ -47,7 +54,7 @@
 }
 
 .textarea{
-    margin: 10px;
+    margin: 4px;
     height: 400px;
 }
 
@@ -77,4 +84,16 @@ li{
 
 .underline{
     text-decoration: underline;
+}
+
+.bottom-buffer{
+    margin-bottom: 20px;
+}
+
+.highlighted-text {
+    background-color: #FFE365;
+}
+
+.highlighted-text:hover {
+    background-color:  #EBC55E;
 }
