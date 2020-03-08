@@ -4,8 +4,7 @@ import './Styles.css'
 class TextPage extends Component {
     state ={
         entry: "",
-        data: {},
-        output:{
+        analysisResults:{
             'comments': [
                 {
                     'end': 54,
@@ -96,7 +95,7 @@ class TextPage extends Component {
 
         xhr.onreadystatechange = (e) => {
             if (xhr.readyState === 4) {
-                this.state.data = xhr.responseText;
+                this.state.analysisResults = xhr.responseText;
                 console.log(xhr.responseText);
             }
         }
@@ -104,10 +103,10 @@ class TextPage extends Component {
 
     render() {
         let output = <div />
-        if(this.state.output) {
+        if(this.state.analysisResults) {
             let comments = []
-            if(this.state.output['comments']) {
-                this.state.output['comments'].forEach(elem =>{
+            if(this.state.analysisResults['comments']) {
+                this.state.analysisResults['comments'].forEach(elem =>{
                     comments.push(<p key={comments.length}>{elem.suggestion}</p>)
                 })
                 console.log(comments)
