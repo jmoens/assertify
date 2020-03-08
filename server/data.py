@@ -36,11 +36,13 @@ class DataHandler():
                 else:
                     wd["values"] += [{ "x": i, "y": 0 }]
 
-            usedTones = []
             for td in toneData:
                 found = False
+                print(td["key"])
                 for t in d["tone"]:
-                    if td["key"] is t["tone_name"]:
+                    print("    " + t["tone_name"])
+                    if td["key"] == t["tone_name"]:
+                        print("        true")
                         td["values"] += [{ "x": i, "y": t["score"] }]
                         found = True
 
