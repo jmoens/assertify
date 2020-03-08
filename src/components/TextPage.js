@@ -121,11 +121,16 @@ class TextPage extends Component {
         } else {
             counts = <div/>
         }
-        let toneAnalysis = moodData.length > 0 ? <div><span className="bold underline">Analysis:</span><div>{moodData}</div></div> :  <div/>
+        let toneAnalysis = moodData.length > 0 ?
+            <div>
+                <span className="bold underline">Analysis:</span>
+                <div>{moodData}</div>
+            </div> : <div/>
         return (
             <div className="container">
                 <div className="row">
                     <div className="card col test noborder">
+                        <span className="boxheader"> Input your text here:</span>
                         <textarea
                             className="textarea textboxYellow"
                             name='searchTerms'
@@ -137,13 +142,16 @@ class TextPage extends Component {
                                onClick={this.onSubmit}>Analyze</a>
                         </div>
                     </div>
-                    <div className="card col test border">
-                        <Highlighter
-                            highlightTag={this.Highlight}
-                            highlightStyle={{fontWeight: 'normal'}}
-                            searchWords={Object.keys(this.state.highlightingInfo)}
-                            textToHighlight={this.state.previousEntry}
-                        />
+                    <div className="card col test noborder">
+                        <span className="boxheader"> Press analyze to veiw suggested changes:</span>
+                        <div className="border">
+                            <Highlighter
+                                highlightTag={this.Highlight}
+                                highlightStyle={{fontWeight: 'normal'}}
+                                searchWords={Object.keys(this.state.highlightingInfo)}
+                                textToHighlight={this.state.previousEntry}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div>
