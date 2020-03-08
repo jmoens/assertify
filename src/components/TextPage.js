@@ -32,7 +32,7 @@ class TextPage extends Component {
         xhr.send(this.state.entry);
 
         xhr.onreadystatechange = (e) => {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
                 this.getAnalysisResults();
             }
         }
@@ -49,7 +49,7 @@ class TextPage extends Component {
         xhr.send();
 
         xhr.onreadystatechange = (e) => {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
                 this.state.data = xhr.responseText;
                 console.log(xhr.responseText);
             }

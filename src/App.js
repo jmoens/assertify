@@ -25,7 +25,7 @@ class App extends Component {
         xhr.send();
 
         xhr.onreadystatechange = (e) => {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
                 localStorage.setItem("sid", xhr.responseText);
             }
         }
