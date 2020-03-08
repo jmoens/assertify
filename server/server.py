@@ -25,6 +25,9 @@ class MyHandler(http.BaseHTTPRequestHandler):
             sid = int(self.path[5:])
             texts = dataHandler.getTexts(sid)
             res = json.dumps(texts[-min(len(texts), 5):])
+        elif self.path.startswith("/stats"):
+            sid = int(self.path[5:])
+            res = json.dumps(dataHandler.getStats(sid))
         else:
             res = "didnt understand request"
         self.wfile.write(res.encode("utf8"))
