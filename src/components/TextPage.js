@@ -6,7 +6,8 @@ import './Styles.css'
 
 class TextPage extends Component {
     state ={
-        entry: ""
+        entry: "",
+        data: {},
     }
 
     onChange = (e) => {
@@ -17,8 +18,42 @@ class TextPage extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        // this.state.entry has the text input
-        console.log(this.state.entry)
+        this.beginAnalysis();
+    }
+
+    beginAnalysis() {
+
+        const xhr = new XMLHttpRequest();
+
+        const url = "http://127.0.0.1:8080/" + localStorage.getItem("sid");
+
+        xhr.open('PUT', url);
+
+        xhr.send(this.state.entry);
+
+        xhr.onreadystatechange = (e) => {
+            if (xhr.readyState == 4) {
+                this.getAnalysisResults();
+            }
+        }
+    }
+
+    getAnalysisResults() {
+
+        const xhr = new XMLHttpRequest();
+
+        const url = "http://127.0.0.1:8080/res/" + localStorage.getItem("sid");
+
+        xhr.open('GET', url);
+
+        xhr.send();
+
+        xhr.onreadystatechange = (e) => {
+            if (xhr.readyState == 4) {
+                this.state.data = xhr.responseText;
+                console.log(xhr.responseText);
+            }
+        }
     }
 
     render() {
