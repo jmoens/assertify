@@ -4,11 +4,11 @@ import './Styles.css'
 class TextPage extends Component {
     state = {
         entry: "",
-        analysisResults: {
+        analysisResults: [{
             'comments': [],
             'counts': {},
             'tone': []
-        }
+        }]
     }
 
     onChange = (e) => {
@@ -68,11 +68,11 @@ class TextPage extends Component {
     render() {
         let output = <div/>;
         let counts = <div/>;
-        // let analysisLength = state.analysisResults.length - 1;
-        if (this.state.analysisResults.counts) {
+        let analysisLength = this.state.analysisResults.length - 1;
+        if (this.state.analysisResults[analysisLength].counts) {
             let lines = [];
 
-            Object.entries(this.state.analysisResults.counts).forEach((k, v) => {
+            Object.entries(this.state.analysisResults[analysisLength].counts).forEach((k, v) => {
                 let text = "You have used the word " + k[0] + " " + k[1].count + " times. " + k[1].response;
                 lines.push(<p key={lines.length}>{text}</p>)
             })
@@ -83,8 +83,8 @@ class TextPage extends Component {
         }
         if (this.state.analysisResults) {
             let comments = []
-            if (this.state.analysisResults['comments']) {
-                this.state.analysisResults['comments'].forEach(elem => {
+            if (this.state.analysisResults[analysisLength]['comments']) {
+                this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
                     comments.push(<p key={comments.length}>{elem.suggestion}</p>)
                 })
             }
