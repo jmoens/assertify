@@ -7,6 +7,15 @@
 .container{
     padding: 10px;
 }
+.noborder {
+    border: 0;
+    box-shadow: none;
+}
+.textboxYellow {
+    border-style: solid;
+    border-width: thick;
+    border-color: #EBC55E;
+}
 
 .darkYellow {
     background-color: #EBC55E;
