@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './Styles.css'
 
 class TextPage extends Component {
-    state ={
+    state = {
         entry: "",
         analysisResults: {
             'comments': [],
@@ -50,9 +50,11 @@ class TextPage extends Component {
         xhr.send();
 
         let that = this;
+        let temp;
+
         xhr.onreadystatechange = (e) => {
             if (xhr.readyState === 4) {
-                that.stateSetter(xhr.responseText);
+                that.stateSetter(JSON.parse(xhr.responseText));
             }
         }
     }
@@ -61,18 +63,17 @@ class TextPage extends Component {
         this.setState({
             analysisResults: str
         })
-    }
+    };
 
     render() {
-        let output = <div />;
-        let counts = <div />;
+        let output = <div/>;
+        let counts = <div/>;
         // let analysisLength = state.analysisResults.length - 1;
-        if (!this.state.analysisResults.counts.empty) {
-            let lines =[];
+        if (this.state.analysisResults.counts) {
+            let lines = [];
 
-            Object.entries(this.state.analysisResults.counts).forEach((k, v) =>
-            {
-                let text = "You have used the word " + k + k[1].count + " times. " + k[1].response;
+            Object.entries(this.state.analysisResults.counts).forEach((k, v) => {
+                let text = "You have used the word " + k[0] + " " + k[1].count + " times. " + k[1].response;
                 lines.push(<p key={lines.length}>{text}</p>)
             })
             counts = (
@@ -80,23 +81,26 @@ class TextPage extends Component {
                     {lines}
                 </div>)
         }
-        if(this.state.analysisResults) {
+        if (this.state.analysisResults) {
             let comments = []
-            if(this.state.analysisResults['comments']) {
-                this.state.analysisResults['comments'].forEach(elem =>{
+            if (this.state.analysisResults['comments']) {
+                this.state.analysisResults['comments'].forEach(elem => {
                     comments.push(<p key={comments.length}>{elem.suggestion}</p>)
                 })
             }
             output = (
-            <div>
-                Comments: {comments}
-            </div>)
+                <div>
+                    Comments: {comments}
+                </div>)
         }
-        return(
-            <div className="container row">
-                <div className="card col s6 noborder">
-                    <textarea className="textarea textboxYellow" onChange={this.onChange} onSubmit={this.onSubmit} />
-                <a className="waves-effect btn darkYellow lighten-2 waves-light" onClick={this.onSubmit}>Analyze</a>
+        return (
+            <div>
+                <div className="container">
+                    <div className="card col noborder">
+                        <textarea className="textarea textboxYellow" onChange={this.onChange} onSubmit={this.onSubmit}/>
+                        <a className="waves-effect btn darkYellow lighten-2 waves-light"
+                           onClick={this.onSubmit}>Analyze</a>
+                    </div>
                 </div>
                 <div>
                     {counts}
