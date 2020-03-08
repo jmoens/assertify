@@ -1,0 +1,57 @@
+{
+  "phrases": [
+    {
+      "phrase": "maybe <pronoun> <verb>",
+      "suggestion": "Consider changing this to: <pro> <verb>"
+    },
+    {
+      "phrase": "I think <pro> <verb>",
+      "suggestion": "Consider changing this to: <pro> <verb>"
+    },
+    {
+      "phrase": "I <passive>",
+      "suggestion": " Consider removing this"
+    },
+    {
+      "phrase": "what do you think",
+      "suggestion": "Consider changing this to: I am open to feedback"
+    },
+    {
+      "phrase": "might be able",
+      "suggestion": "Consider changing this to: should be able"
+    },
+    {
+      "phrase": "just wanted",
+      "suggestion": "Consider changing this to: wanted"
+    },
+    {
+      "phrase": "sorry for bothering you",
+      "suggestion": "Consider removing this."
+    },
+    {
+      "phrase": "I wonder if",
+      "suggestion": "TODO: Not really sure how to tackle this"
+    }
+  ],
+  "pronoun": [
+    "I",
+    "you",
+    "we"
+  ],
+  "verb": [
+    "could",
+    "should",
+    "would",
+    "can"
+  ],
+  "passive": [
+    "think",
+    "feel",
+    "feel like",
+    "think that",
+    "believe"
+  ],
+  "responses": [
+    ""
+  ]
+}
