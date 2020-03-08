@@ -8,13 +8,28 @@ class TextPage extends Component {
             'comments': [],
             'counts': {},
             'tone': []
-        }
+        },
+        recording: "Start Recording"
+
     }
 
     onChange = (e) => {
         this.setState({
             entry: e.target.value
         })
+    }
+
+    onRecord = () => {
+        if(this.state.recording === "Start Recording"){
+            this.setState({
+                recording: "Stop Recording"
+            })
+        } else {
+            this.setState({
+                recording: "Start Recording"
+            })
+        }
+        // TODO
     }
 
     onSubmit = (e) => {
@@ -52,7 +67,7 @@ class TextPage extends Component {
         let that = this;
         xhr.onreadystatechange = (e) => {
             if (xhr.readyState === 4) {
-                that.stateSetter(xhr.responseText);
+                that.stateSetter(JSON.parse(xhr.responseText));
             }
         }
     }
@@ -66,8 +81,9 @@ class TextPage extends Component {
     render() {
         let output = <div />;
         let counts = <div />;
+        console.log(this.state)
         // let analysisLength = state.analysisResults.length - 1;
-        if (!this.state.analysisResults.counts.empty) {
+        if (this.state.analysisResults.counts) {
             let lines =[];
 
             Object.entries(this.state.analysisResults.counts).forEach((k, v) =>
@@ -94,6 +110,7 @@ class TextPage extends Component {
         }
         return(
             <div className="container row">
+                <button onClick={this.onRecord} onSubmit={this.onSubmit}>{this.state.recording}</button>
                 <div className="card col s6 noborder">
                     <textarea className="textarea textboxYellow" onChange={this.onChange} onSubmit={this.onSubmit} />
                 <a className="waves-effect btn darkYellow lighten-2 waves-light" onClick={this.onSubmit}>Analyze</a>
