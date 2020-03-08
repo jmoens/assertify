@@ -15,8 +15,8 @@ class Navbar extends Component {
                     <div className="toolbarContainer ">
                     <img className="logo" src={image} alt="assertify"></img>
                         <ul className="right">
-                            <li><Link className="linkTitle" to="/">Home</Link></li>
-                            <li><NavLink className="linkTitle" to="/translator">Translator</NavLink></li>
+                            <li><Link className="linkTitle" to="/">Profile</Link></li>
+                            <li><NavLink className="linkTitle" to="/translator">Analyze</NavLink></li>
                             <li><NavLink className="linkTitle" to="/resources">Resources</NavLink></li>
 
                         </ul>
