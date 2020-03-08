@@ -114,38 +114,36 @@ class TextPage extends Component {
                 </div>)
         }
         return (
-            <div>
-                <div className="container">
-                    <div className="card col noborder">
+            <div className="container">
+                <div className="row">
+                    <div className="card col s6 noborder">
                         <textarea
                             className="textarea textboxYellow"
                             name='searchTerms'
                             onChange={this.onChange}
                             onSubmit={this.onSubmit}
                         />
-                        <textarea
-                            className="textarea textboxYellow"
-                            name='searchTerms'
-                            onChange={this.onChange}
-                            onSubmit={this.onSubmit}
+                        <div className="center-align">
+                            <a className="waves-effect btn darkYellow lighten-2 waves-light"
+                               onClick={this.onSubmit}>Analyze</a>
+                        </div>
+                    </div>
+                    <div className="card col s6">
+                        <Highlighter
+                            highlightStyle={{fontWeight: 'normal'}}
+                            searchWords={["the", "where", "think", "sorry"]}
+                            textToHighlight={this.state.previousEntry}
                         />
-                        <a className="waves-effect btn darkYellow lighten-2 waves-light"
-                           onClick={this.onSubmit}>Analyze</a>
                     </div>
-                    <Highlighter
-                        highlightStyle={{fontWeight: 'normal'}}
-                        searchWords={["the", "where", "think", "sorry"]}
-                        textToHighlight={this.state.previousEntry}
-                    />
-                    <div>
-                        {counts}
-                    </div>
-                    <div className="bold underline">
-                        Analysis:
-
-                    </div>
-                    {moodData}
                 </div>
+                <div>
+                    {counts}
+                </div>
+                <div className="bold underline">
+                    Analysis:
+
+                </div>
+                {moodData}
             </div>
         )
     }
