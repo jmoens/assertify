@@ -24,14 +24,14 @@ class TextPage extends Component {
     render() {
         return(
             <div className="container row">
-                <div className="card col s6 deep-purple lighten-4">
+                <div className="card col s6 darkYellow lighten-4">
                 <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
                     <FormControl>
                         <InputLabel htmlFor="component-simple">Input</InputLabel>
                         <Input id="component-simple" value={this.state.entry} onChange={this.onChange} onSubmit={this.onSubmit}/>
                     </FormControl>                
                 </form>
-                <a className="waves-effect btn deep-purple lighten-2 waves-light" onClick={this.onSubmit}>Analyze</a>
+                <a className="waves-effect btn darkYellow lighten-2 waves-light" onClick={this.onSubmit}>Analyze</a>
                 </div>
                 <div className="col s6">
                 <p>

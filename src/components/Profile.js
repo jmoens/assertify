@@ -30,7 +30,7 @@ class Profile extends Component {
         }
         return(
             <div className="container">
-                <div className="card deep-purple lighten-4">
+                <div className="card darkYellow">
                     <h4 className="center-align">Profile</h4>
                     <p>
                         <span className="bold">Name:</span> {this.state.fullName}
@@ -42,7 +42,7 @@ class Profile extends Component {
                     <span className="bold">Email:</span>  {this.state.email}
                     </p>
                     <div className="center-align">
-                        <a className="waves-effect btn deep-purple lighten-2 waves-light" onClick={this.onClick}>
+                        <a className="waves-effect btn darkYellow lighten-2 waves-light" onClick={this.onClick}>
                             <i class="material-icons left">insert_chart</i>
                             {this.state.statsLabel}
                         </a>
