@@ -25,8 +25,6 @@ class Profile extends Component {
                 if (xhr.readyState === 4) {
                     let json = JSON.parse(xhr.responseText);
                     console.log(json);
-                    console.log(json["tones"]);
-                    console.log(json["words"]);
                     this.setState({
                         json: json,
                         statsLabel: "Hide Statistics"
@@ -45,36 +43,36 @@ class Profile extends Component {
         let wordStatistics = <div/>
         if(this.state.statsLabel === "Hide Statistics"){
             if(this.state.json['tones'].length > 0){
-                let config = { 
-                    showXAxis: true, 
-                    showXAxisLabel: true, 
-                    xLabel: 'Trial', 
-                    xLabelPosition: 'center', 
-                    showYAxis: true, 
-                    showYAxisLabel: true, 
-                    yLabel: 'Count', 
+                let config = {
+                    showXAxis: true,
+                    showXAxisLabel: true,
+                    xLabel: 'Trial',
+                    xLabelPosition: 'center',
+                    showYAxis: true,
+                    showYAxisLabel: true,
+                    yLabel: 'Count',
                     yLabelPosition: 'middle'}
                 toneStatistics = <div className="center bottom-buffer">Tones<LineChart axisConfig={config} data={this.state.json['tones']} /></div>
             } else {
                 toneStatistics = <div>No Statistics to Show</div>
             }
             if(this.state.json['words'].length > 0) {
-                let config = { 
-                    showXAxis: true, 
-                    showXAxisLabel: true, 
-                    xLabel: 'Trial', 
-                    xLabelPosition: 'center', 
-                    showYAxis: true, 
-                    showYAxisLabel: true, 
-                    yLabel: 'Count', 
+                let config = {
+                    showXAxis: true,
+                    showXAxisLabel: true,
+                    xLabel: 'Trial',
+                    xLabelPosition: 'center',
+                    showYAxis: true,
+                    showYAxisLabel: true,
+                    yLabel: 'Count',
                     yLabelPosition: 'middle'}
                 wordStatistics = <div className="center">Word Count<LineChart axisConfig={config} data={this.state.json['words']} /></div>
             }
-            
+
         }
         return(
             <div className="container">
-                
+
                 <div>
                     <h4 className="center-align">Profile</h4>
                     <div className="card underline darkYellow"></div>
