@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import './Styles.css'
 
 class TextPage extends Component {
     state ={
-        entry: ""
+        entry: "",
+        output:"this will be the output"
     }
 
     onChange = (e) => {
@@ -25,17 +23,12 @@ class TextPage extends Component {
         return(
             <div className="container row">
                 <div className="card col s6 deep-purple lighten-4">
-                <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
-                    <FormControl>
-                        <InputLabel htmlFor="component-simple">Input</InputLabel>
-                        <Input id="component-simple" value={this.state.entry} onChange={this.onChange} onSubmit={this.onSubmit}/>
-                    </FormControl>                
-                </form>
+                <textarea className="textarea" onChange={this.onChange} onSubmit={this.onSubmit} />
                 <a className="waves-effect btn deep-purple lighten-2 waves-light" onClick={this.onSubmit}>Analyze</a>
                 </div>
                 <div className="col s6">
                 <p>
-                    OUTPUT
+                    {this.state.output}
                 </p>
                 </div>
             </div>
