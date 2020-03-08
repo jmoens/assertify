@@ -11,6 +11,11 @@
     border: 0;
     box-shadow: none;
 }
+.underline{
+    height: 4px;
+    padding: 0px;
+}
+
 .textboxYellow {
     border-style: solid;
     border-width: thick;
@@ -47,7 +52,7 @@
 }
 
 .textarea{
-    margin: 10px;
+    margin: 4px;
     height: 400px;
 }
 
