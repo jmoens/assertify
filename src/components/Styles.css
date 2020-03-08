@@ -114,3 +114,11 @@ li{
 .tooltip {
     font-size: 16px;
 }
+
+.bullets {
+    padding-left: 25px;
+}
+
+.resourceField {
+    margin-bottom: 50px;
+}
