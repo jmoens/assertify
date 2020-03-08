@@ -1,5 +1,8 @@
 from pprint import pprint
 import json
+from ibm_watson import ToneAnalyzerV3
+from ibm_watson.tone_analyzer_v3 import ToneInput
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
 class Parser():
     def __init__(self):
@@ -7,12 +10,17 @@ class Parser():
             self.phrases = json.load(f)
         with open('json/simpleWordMapping.json') as f:
             self.words = json.load(f)
+        authenticator = IAMAuthenticator("18fQw0ZxmyegvvQUSrMoYPeLL0oljhyU74Hg7W8f_0HO")
+        self.service = ToneAnalyzerV3(version='2017-09-21',
+                                      authenticator=authenticator)
+        self.service.set_service_url('https://gateway.watsonplatform.net/tone-analyzer/api')
 
     def parse(self, text):
         counts = self.count(text)
         comments = self.comments(text)
+        tone = self.tone(text)["utterances_tone"][0]["tones"]
 
-        return { "counts": counts, "comments": comments }
+        return { "counts": counts, "comments": comments, "tone": tone }
 
     def count(self, text):
         counts = {}
@@ -51,6 +59,11 @@ class Parser():
 
         return comments
 
+    def tone(self, text):
+        utterances = [{ "text": text, "user": "u"}]
+        return self.service.tone_chat(utterances).get_result()
+
 if __name__ == '__main__':
     parser = Parser()
     pprint(parser.parse("Sorry thInk jUSt just I wonder if please sorry I think just wanted"))
+    pprint(parser.parse("I demand that you complete this you idiot"))
