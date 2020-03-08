@@ -24,10 +24,7 @@ class MyHandler(http.BaseHTTPRequestHandler):
         elif self.path.startswith("/res"):
             sid = int(self.path[5:])
             texts = dataHandler.getTexts(sid)
-            comments = []
-            for text in texts[-min(len(texts), 5):]:
-                comments += [parser.parse(text)]
-            res = json.dumps(comments)
+            res = json.dumps(texts[-min(len(texts), 5):])
         else:
             res = "didnt understand request"
         self.wfile.write(res.encode("utf8"))
@@ -41,7 +38,7 @@ class MyHandler(http.BaseHTTPRequestHandler):
         sid = int(self.path[1:])
         length = int(self.headers["Content-Length"])
         s = self.rfile.read(length).decode("utf8")
-        dataHandler.setText(sid, s)
+        dataHandler.setText(sid, parser.parse(s))
         self.rfile.close()
 
     def do_OPTIONS(self):

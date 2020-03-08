@@ -20,7 +20,7 @@ class Parser():
         comments = self.comments(text)
         tone = self.tone(text)["utterances_tone"][0]["tones"]
 
-        return { "counts": counts, "comments": comments, "tone": tone }
+        return { "counts": counts, "comments": comments, "tone": tone, "text": text }
 
     def count(self, text):
         counts = {}
