@@ -5,7 +5,6 @@ import Profile from './components/Profile';
 import TextPage from './components/TextPage';
 import Resources from './components/Resources';
 
-
 class App extends Component {
 
     componentDidMount() {

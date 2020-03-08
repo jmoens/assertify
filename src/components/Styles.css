@@ -7,3 +7,49 @@
 .container{
     padding: 10px;
 }
+
+.darkYellow {
+    background-color: #EBC55E;
+}
+
+.mediumGold {
+    background-color: #FFE365;
+}
+
+.lightYellow {
+    background-color: #FFF280;
+}
+
+.myBlack {
+    background-color: #1B1B1B;
+}
+
+.myGrey {
+    background-color: #545454;
+}
+
+.logo {
+    width: 180.5px;
+    height: 45.5px;
+}
+
+.linkTitle {
+    color: #1B1B1B;
+}
+
+.textarea{
+    margin-top: 10px;
+    height: 500px;
+}
+
+p{
+    font-size: 16px;
+}
+
+li{
+    font-size: 16px;
+}
+
+.list{
+    font-size: 16px;
+}
