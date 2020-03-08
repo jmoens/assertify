@@ -23,14 +23,14 @@ class TextPage extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        let text = this.state.entry
         this.setState({
-            previousEntry: this.state.entry
-        })
-        this.beginAnalysis();
+            previousEntry: text,
+        }, () => this.beginAnalysis())
+        // this.beginAnalysis();
     }
 
     beginAnalysis() {
-
         const xhr = new XMLHttpRequest();
 
         const url = "http://127.0.0.1:8080/" + localStorage.getItem("sid");
@@ -40,6 +40,7 @@ class TextPage extends Component {
         xhr.send(this.state.entry);
 
         xhr.onreadystatechange = (e) => {
+
             if (xhr.readyState === 4) {
                 this.getAnalysisResults();
             }
@@ -59,9 +60,11 @@ class TextPage extends Component {
         let that = this;
 
         xhr.onreadystatechange = (e) => {
+            console.log("ready state", xhr.readyState)
             if (xhr.readyState === 4) {
+                console.log("RES", xhr.responseText)
                 that.stateSetter(JSON.parse(xhr.responseText));
-                that.setSearchTerms();
+                // that.setSearchTerms();
             }
         }
     }
@@ -69,7 +72,7 @@ class TextPage extends Component {
     stateSetter(str) {
         this.setState({
             analysisResults: str
-        })
+        }, () => this.setSearchTerms())
     };
 
     setSearchTerms() {
@@ -82,8 +85,6 @@ class TextPage extends Component {
         this.setState({
             highlightingInfo: highlightInfo,
         })
-
-        console.log(this.state.highlightingInfo)
     }
 
     Highlight = ({children, highlightIndex}) => (
@@ -93,25 +94,19 @@ class TextPage extends Component {
     );
 
     render() {
-        let output = <div/>;
+        // let output = <div/>;
         let counts = <div/>;
         let moodData = []
-        let moods = ["frustrated", "sad", "satisfied", "excited", "polite", "impolite", "sympathetic"]
-        let analysisLength = this.state.analysisResults.length - 1;
-        if (this.state.analysisResults[analysisLength]['tone']) {
-            moods.forEach(mood => {
-                this.state.analysisResults[analysisLength]['tone'].forEach(result => {
-                    if (result.tone_id === mood && result.score >= 0.5) {
-                        moodData.push(<div className="bold" key={moodData.length}>{mood}<i
-                            className="material-icons">check_box</i></div>)
-                    } else {
-                        moodData.push(<div key={moodData.length}>{mood} </div>)
-                    }
-                })
+        let analysisLength = this.state.analysisResults.length > 0 ? this.state.analysisResults.length - 1 : 0;
+        if (this.state.analysisResults[analysisLength] && this.state.analysisResults[analysisLength]['tone']) {
+            this.state.analysisResults[analysisLength]['tone'].forEach(result => {
+                if (result.score >= 0.5) {
+                    moodData.push(<div className="bold" key={moodData.length}>{result.tone_name}</div>)
+                }
             })
         }
 
-        if (this.state.analysisResults[analysisLength].counts) {
+        if (this.state.analysisResults[analysisLength] && this.state.analysisResults[analysisLength].counts) {
             let lines = [];
 
             Object.entries(this.state.analysisResults[analysisLength].counts).forEach((k, v) => {
@@ -123,19 +118,22 @@ class TextPage extends Component {
                 <div>
                     {lines}
                 </div>)
+        } else {
+            counts = <div/>
         }
-        if (this.state.analysisResults) {
-            let comments = []
-            if (this.state.analysisResults[analysisLength]['comments']) {
-                this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
-                    comments.push(<p key={comments.length}>{elem.suggestion}</p>)
-                })
-            }
-            output = (
-                <div>
-                    Comments: {comments}
-                </div>)
-        }
+        let toneAnalysis = moodData.length > 0 ? <div><span className="bold underline">Analysis:</span><div>{moodData}</div></div> :  <div/>
+        // if (this.state.analysisResults) {
+        //     let comments = []
+        //     if (this.state.analysisResults[analysisLength]['comments']) {
+        //         this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
+        //             comments.push(<p key={comments.length}>{elem.suggestion}</p>)
+        //         })
+        //     }
+        //     output = (
+        //         <div>
+        //             Comments: {comments}
+        //         </div>)
+        // }
         return (
             <div className="container">
                 <div className="row">
@@ -163,10 +161,7 @@ class TextPage extends Component {
                 <div>
                     {counts}
                 </div>
-                <div className="bold underline">
-                    Tone Analysis:
-                </div>
-                {moodData}
+                {toneAnalysis}
             </div>
         )
     }
