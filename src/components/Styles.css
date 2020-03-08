@@ -62,3 +62,7 @@ li{
 .list{
     font-size: 16px;
 }
+
+.underline{
+    text-decoration: underline;
+}
