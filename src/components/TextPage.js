@@ -108,7 +108,7 @@ class TextPage extends Component {
             let comments = []
             if(this.state.output['comments']) {
                 this.state.output['comments'].forEach(elem =>{
-                    comments.push(<p>{elem.suggestion}</p>)
+                    comments.push(<p key={comments.length}>{elem.suggestion}</p>)
                 })
                 console.log(comments)
             }
@@ -119,14 +119,12 @@ class TextPage extends Component {
         }
         return(
             <div className="container row">
-                <div className="card col s6 darkYellow lighten-4">
-                    <textarea className="textarea" onChange={this.onChange} onSubmit={this.onSubmit} />
+                <div className="card col s6 noborder">
+                    <textarea className="textarea textboxYellow" onChange={this.onChange} onSubmit={this.onSubmit} />
                 <a className="waves-effect btn darkYellow lighten-2 waves-light" onClick={this.onSubmit}>Analyze</a>
                 </div>
                 <div className="col s6">
-                <p>
                     {output}
-                </p>
                 </div>
             </div>
         )
