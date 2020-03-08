@@ -45,6 +45,8 @@
 .logo {
     width: 180.5px;
     height: 45.5px;
+    /* margin-left: 50px;
+    margin-top: 15px; */
 }
 
 .linkTitle {
@@ -82,4 +84,8 @@ li{
 
 .underline{
     text-decoration: underline;
+}
+
+.bottom-buffer{
+    margin-bottom: 20px;
 }

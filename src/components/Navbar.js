@@ -12,9 +12,11 @@ class Navbar extends Component {
         return (
             <div>
                 <nav className="nav-wrapper mediumGold">
+                
                     <div className="container ">
+                    <img className="logo" src={image} alt="assertify"></img>
                         <ul className="right">
-                            <li><img className="logo" src={image} alt="assertify"></img></li>
+                            {/* <li><img className="logo" src={image} alt="assertify"></img></li> */}
                             <li><Link className="linkTitle" to="/">Home</Link></li>
                             <li><NavLink className="linkTitle" to="/translator">TextBox</NavLink></li>
                             <li><NavLink className="linkTitle" to="/resources">Resources</NavLink></li>

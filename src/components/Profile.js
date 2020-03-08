@@ -49,23 +49,23 @@ class Profile extends Component {
                     showXAxis: true, 
                     showXAxisLabel: true, 
                     xLabel: 'Trial', 
-                    xLabelPosition: 'right', 
+                    xLabelPosition: 'center', 
                     showYAxis: true, 
                     showYAxisLabel: true, 
                     yLabel: 'Count', 
-                    yLabelPosition: 'top'}
-                toneStatistics = <div className="center">Tones<LineChart axisConfig={config} data={this.state.json['tones']} /></div>
+                    yLabelPosition: 'middle'}
+                toneStatistics = <div className="center bottom-buffer">Tones<LineChart axisConfig={config} data={this.state.json['tones']} /></div>
             }
             if(this.state.json['words'].length > 0) {
                 let config = { 
                     showXAxis: true, 
                     showXAxisLabel: true, 
                     xLabel: 'Trial', 
-                    xLabelPosition: 'right', 
+                    xLabelPosition: 'center', 
                     showYAxis: true, 
                     showYAxisLabel: true, 
                     yLabel: 'Count', 
-                    yLabelPosition: 'bottom'}
+                    yLabelPosition: 'middle'}
                 wordStatistics = <div className="center">Word Count<LineChart axisConfig={config} data={this.state.json['words']} /></div>
             }
             
@@ -85,7 +85,7 @@ class Profile extends Component {
                     <p>
                     <span className="bold">Email:</span>  {this.state.email}
                     </p>
-                    <div className="center-align">
+                    <div className="center-align bottom-buffer">
                         <a className="waves-effect btn mediumGold black-text" onClick={this.onClick}>
                             <i className="material-icons left">insert_chart</i>
                             {this.state.statsLabel}
