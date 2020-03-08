@@ -13,11 +13,14 @@
     height: 500px;
 }
 
-.backgroundPurple{
+p{
+    font-size: 16px;
 }
-.purple{
 
+li{
+    font-size: 16px;
 }
-.lightPurple{
 
+.list{
+    font-size: 16px;
 }
