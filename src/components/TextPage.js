@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import './Styles.css'
+import Highlighter from 'react-highlight-words';
 
 class TextPage extends Component {
     state = {
         entry: "",
+        previousEntry: "",
         analysisResults: [{
             'comments': [],
             'counts': {},
@@ -19,6 +21,9 @@ class TextPage extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        this.setState({
+            previousEntry: this.state.entry
+        })
         this.beginAnalysis();
     }
 
@@ -50,7 +55,6 @@ class TextPage extends Component {
         xhr.send();
 
         let that = this;
-        let temp;
 
         xhr.onreadystatechange = (e) => {
             if (xhr.readyState === 4) {
@@ -97,11 +101,27 @@ class TextPage extends Component {
             <div>
                 <div className="container">
                     <div className="card col noborder">
-                        <textarea className="textarea textboxYellow" onChange={this.onChange} onSubmit={this.onSubmit}/>
+                        <textarea
+                            className="textarea textboxYellow"
+                            name='searchTerms'
+                            onChange={this.onChange}
+                            onSubmit={this.onSubmit}
+                        />
+                        <textarea
+                            className="textarea textboxYellow"
+                            name='searchTerms'
+                            onChange={this.onChange}
+                            onSubmit={this.onSubmit}
+                        />
                         <a className="waves-effect btn darkYellow lighten-2 waves-light"
                            onClick={this.onSubmit}>Analyze</a>
                     </div>
                 </div>
+                <Highlighter
+                    highlightStyle={{ fontWeight: 'normal' }}
+                    searchWords={["the", "where", "think", "sorry"]}
+                    textToHighlight={this.state.previousEntry}
+                />
                 <div>
                     {counts}
                 </div>

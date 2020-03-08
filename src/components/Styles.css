@@ -47,8 +47,9 @@
 }
 
 .textarea{
-    margin-top: 10px;
+    margin: 10px;
     height: 400px;
+    width: 45%
 }
 
 p{
