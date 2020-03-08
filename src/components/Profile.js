@@ -42,7 +42,7 @@ class Profile extends Component {
                     <span className="bold">Email:</span>  {this.state.email}
                     </p>
                     <div className="center-align">
-                        <a className="waves-effect btn darkYellow lighten-2 waves-light" onClick={this.onClick}>
+                        <a className="waves-effect btn mediumGold black-text" onClick={this.onClick}>
                             <i className="material-icons left">insert_chart</i>
                             {this.state.statsLabel}
                         </a>
