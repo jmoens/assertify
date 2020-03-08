@@ -7,8 +7,7 @@ class TextPage extends Component {
     state = {
         entry: "",
         previousEntry: "",
-        searchTerms: [],
-        searchComments: [],
+        highlightingInfo: {},
         analysisResults: [{
             'comments': [],
             'counts': {},
@@ -74,22 +73,21 @@ class TextPage extends Component {
     };
 
     setSearchTerms() {
-        let terms = [];
-        let termComments = [];
+        let highlightInfo = {};
         let analysisLength = this.state.analysisResults.length - 1;
         this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
-                terms.push(this.state.previousEntry.slice(elem.start, elem.end));
-                termComments.push(elem.suggestion);
+                highlightInfo[this.state.previousEntry.slice(elem.start, elem.end)] = elem.suggestion;
             }
         )
         this.setState({
-            searchTerms: terms,
-            searchComments: termComments
+            highlightingInfo: highlightInfo,
         })
+
+        console.log(this.state.highlightingInfo)
     }
 
     Highlight = ({children, highlightIndex}) => (
-        <Tooltip title={this.state.searchComments[highlightIndex]}>
+        <Tooltip title={this.state.highlightingInfo[children]}>
             <mark className="highlighted-text">{children}</mark>
         </Tooltip>
     );
@@ -157,7 +155,7 @@ class TextPage extends Component {
                         <Highlighter
                             highlightTag={this.Highlight}
                             highlightStyle={{fontWeight: 'normal'}}
-                            searchWords={this.state.searchTerms}
+                            searchWords={Object.keys(this.state.highlightingInfo)}
                             textToHighlight={this.state.previousEntry}
                         />
                     </div>
@@ -166,7 +164,7 @@ class TextPage extends Component {
                     {counts}
                 </div>
                 <div className="bold underline">
-                    Analysis:
+                    Tone Analysis:
                 </div>
                 {moodData}
             </div>
