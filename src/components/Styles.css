@@ -7,6 +7,7 @@
 .container{
     padding: 10px;
 }
+
 .darkYellow {
     background-color: #EBC55E;
 }
@@ -34,4 +35,21 @@
 
 .linkTitle {
     color: #1B1B1B;
+}
+
+.textarea{
+    margin-top: 10px;
+    height: 500px;
+}
+
+p{
+    font-size: 16px;
+}
+
+li{
+    font-size: 16px;
+}
+
+.list{
+    font-size: 16px;
 }
