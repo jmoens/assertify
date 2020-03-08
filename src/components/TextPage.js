@@ -122,18 +122,6 @@ class TextPage extends Component {
             counts = <div/>
         }
         let toneAnalysis = moodData.length > 0 ? <div><span className="bold underline">Analysis:</span><div>{moodData}</div></div> :  <div/>
-        // if (this.state.analysisResults) {
-        //     let comments = []
-        //     if (this.state.analysisResults[analysisLength]['comments']) {
-        //         this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
-        //             comments.push(<p key={comments.length}>{elem.suggestion}</p>)
-        //         })
-        //     }
-        //     output = (
-        //         <div>
-        //             Comments: {comments}
-        //         </div>)
-        // }
         return (
             <div className="container">
                 <div className="row">
