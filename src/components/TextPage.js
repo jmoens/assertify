@@ -76,15 +76,10 @@ class TextPage extends Component {
         let moods = ["frustrated", "sad", "satisfied", "excited", "polite", "impolite", "sympathetic"]
         let analysisLength = this.state.analysisResults.length - 1;
         if (this.state.analysisResults[analysisLength]['tone']) {
-            moods.forEach(mood => {
-                this.state.analysisResults[analysisLength]['tone'].forEach(result => {
-                    if (result.tone_id === mood && result.score >= 0.5) {
-                        moodData.push(<div className="bold" key={moodData.length}>{mood}<i
-                            className="material-icons">check_box</i></div>)
-                    } else {
-                        moodData.push(<div key={moodData.length}>{mood} </div>)
-                    }
-                })
+            this.state.analysisResults[analysisLength]['tone'].forEach(result => {
+                if (result.score >= 0.5) {
+                    moodData.push(<div className="bold" key={moodData.length}>{result.tone_name}</div>)
+                }
             })
         }
 
@@ -141,7 +136,6 @@ class TextPage extends Component {
                 </div>
                 <div className="bold underline">
                     Analysis:
-
                 </div>
                 {moodData}
             </div>
