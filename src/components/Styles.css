@@ -90,3 +90,11 @@ li{
 .bottom-buffer{
     margin-bottom: 20px;
 }
+
+.highlighted-text {
+    background-color: #FFE365;
+}
+
+.highlighted-text:hover {
+    background-color:  #EBC55E;
+}

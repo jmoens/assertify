@@ -3,12 +3,17 @@
     {
       "type": "exact",
       "phrase": "maybe",
-      "suggestion": "Consider changing this."
+      "suggestion": "This word comes across as uncertain. Consider alternatives."
+    },
+    {
+      "type": "exact",
+      "phrase": "just",
+      "suggestion": "This word comes across as passive or apologetic. Consider removing it."
     },
     {
       "type": "fill",
       "phrase": "i <passive>",
-      "suggestion": "Consider removing this."
+      "suggestion": "Consider removing this completely."
     },
     {
       "type": "fill",
@@ -28,12 +33,17 @@
     {
       "type": "exact",
       "phrase": "sorry for bothering you",
-      "suggestion": "Consider removing this."
+      "suggestion": "Consider removing this altogether. Thank people for their time rather than apologizing for asking for it."
+    },
+    {
+      "type": "exact",
+      "phrase": "sorry to bother you",
+      "suggestion": "Consider removing this altogether. Thank people for their time rather than apologizing for asking for it."
     },
     {
       "type": "exact",
       "phrase": "i wonder if",
-      "suggestion": "Consider removing this."
+      "suggestion": "Consider removing this or replacing it with a more direct statement of your idea."
     }
   ],
   "passive": [

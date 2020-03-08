@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import './Styles.css'
 import Highlighter from 'react-highlight-words';
+import {Tooltip} from "@material-ui/core";
 
 class TextPage extends Component {
     state = {
         entry: "",
         previousEntry: "",
-        searchTerms: [],
+        highlightingInfo: {},
         analysisResults: [{
             'comments': [],
             'counts': {},
@@ -39,7 +40,7 @@ class TextPage extends Component {
         xhr.send(this.state.entry);
 
         xhr.onreadystatechange = (e) => {
-            
+
             if (xhr.readyState === 4) {
                 this.getAnalysisResults();
             }
@@ -75,20 +76,22 @@ class TextPage extends Component {
     };
 
     setSearchTerms() {
-        let terms = [];
-        console.log("STATE", this.state)
-        let analysisLength = this.state.analysisResults.length > 0 ? this.state.analysisResults.length - 1 : 0;
-        if(this.state.analysisResults[analysisLength]){
-            this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
-                terms.push(this.state.previousEntry.slice(elem.start, elem.end))
+        let highlightInfo = {};
+        let analysisLength = this.state.analysisResults.length - 1;
+        this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
+                highlightInfo[this.state.previousEntry.slice(elem.start, elem.end)] = elem.suggestion;
             }
         )
         this.setState({
-            searchTerms: terms
+            highlightingInfo: highlightInfo,
         })
-        }
-       
     }
+
+    Highlight = ({children, highlightIndex}) => (
+        <Tooltip title={this.state.highlightingInfo[children]}>
+            <mark className="highlighted-text">{children}</mark>
+        </Tooltip>
+    );
 
     render() {
         // let output = <div/>;
@@ -148,8 +151,9 @@ class TextPage extends Component {
                     </div>
                     <div className="card col test border">
                         <Highlighter
+                            highlightTag={this.Highlight}
                             highlightStyle={{fontWeight: 'normal'}}
-                            searchWords={this.state.searchTerms}
+                            searchWords={Object.keys(this.state.highlightingInfo)}
                             textToHighlight={this.state.previousEntry}
                         />
                     </div>
