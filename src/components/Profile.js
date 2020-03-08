@@ -55,6 +55,8 @@ class Profile extends Component {
                     yLabel: 'Count', 
                     yLabelPosition: 'middle'}
                 toneStatistics = <div className="center bottom-buffer">Tones<LineChart axisConfig={config} data={this.state.json['tones']} /></div>
+            } else {
+                toneStatistics = <div>No Statistics to Show</div>
             }
             if(this.state.json['words'].length > 0) {
                 let config = { 
