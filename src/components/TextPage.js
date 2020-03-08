@@ -130,7 +130,7 @@ class TextPage extends Component {
             <div className="container">
                 <div className="row">
                     <div className="card col test noborder">
-                        <span className="boxheader"> Input your text here:</span>
+                        <span className="boxheader">Input your text here</span>
                         <textarea
                             className="textarea textboxYellow"
                             name='searchTerms'
@@ -143,7 +143,7 @@ class TextPage extends Component {
                         </div>
                     </div>
                     <div className="card col test noborder">
-                        <span className="boxheader"> Press analyze to veiw suggested changes:</span>
+                        <span className="boxheader">Press analyze to view suggested changes</span>
                         <div className="border">
                             <Highlighter
                                 highlightTag={this.Highlight}
