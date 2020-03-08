@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import './Styles.css'
 import Highlighter from 'react-highlight-words';
+import {Tooltip} from "@material-ui/core";
 
 class TextPage extends Component {
     state = {
         entry: "",
         previousEntry: "",
         searchTerms: [],
+        searchComments: [],
         analysisResults: [{
             'comments': [],
             'counts': {},
@@ -73,15 +75,24 @@ class TextPage extends Component {
 
     setSearchTerms() {
         let terms = [];
+        let termComments = [];
         let analysisLength = this.state.analysisResults.length - 1;
         this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
-                terms.push(this.state.previousEntry.slice(elem.start, elem.end))
+                terms.push(this.state.previousEntry.slice(elem.start, elem.end));
+                termComments.push(elem.suggestion);
             }
         )
         this.setState({
-            searchTerms: terms
+            searchTerms: terms,
+            searchComments: termComments
         })
     }
+
+    Highlight = ({children, highlightIndex}) => (
+        <Tooltip title={this.state.searchComments[highlightIndex]}>
+            <mark className="highlighted-text">{children}</mark>
+        </Tooltip>
+    );
 
     render() {
         let output = <div/>;
@@ -144,6 +155,7 @@ class TextPage extends Component {
                     </div>
                     <div className="card col test border">
                         <Highlighter
+                            highlightTag={this.Highlight}
                             highlightStyle={{fontWeight: 'normal'}}
                             searchWords={this.state.searchTerms}
                             textToHighlight={this.state.previousEntry}
@@ -155,7 +167,6 @@ class TextPage extends Component {
                 </div>
                 <div className="bold underline">
                     Analysis:
-
                 </div>
                 {moodData}
             </div>

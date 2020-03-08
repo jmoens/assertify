@@ -11,16 +11,30 @@ class Profile extends Component {
 
     onClick = (e) => {
         if(this.state.statsLabel === "Show Statistics"){
-            this.setState({
-                statsLabel: "Hide Statistics"
-            })
-            
+            const xhr = new XMLHttpRequest();
+
+            const url = "http://127.0.0.1:8080/stats/" + localStorage.getItem("sid");
+
+            xhr.open('GET', url);
+
+            xhr.send();
+
+            xhr.onreadystatechange = (e) => {
+                if (xhr.readyState === 4) {
+                    let json = JSON.parse(xhr.responseText);
+                    console.log(json);
+                    console.log(json["tones"]);
+                    console.log(json["words"]);
+                    this.setState({
+                        statsLabel: "Hide Statistics"
+                    });
+                }
+            }
         } else {
             this.setState({
                 statsLabel: "Show Statistics"
-            })
+            });
         }
-        
     }
 
     render() {

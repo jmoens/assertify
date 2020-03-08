@@ -78,3 +78,11 @@ li{
 .underline{
     text-decoration: underline;
 }
+
+.highlighted-text {
+    background-color: #FFE365;
+}
+
+.highlighted-text:hover {
+    background-color:  #EBC55E;
+}
