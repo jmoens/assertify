@@ -1,4 +1,5 @@
 from pprint import pprint
+import nltk
 import json
 
 class Parser():
@@ -9,20 +10,43 @@ class Parser():
             self.words = json.load(f)
 
     def parse(self, text):
+        counts = self.count(text)
+        comments = self.comments(text)
+
+        return { "counts": counts, "comments": comments }
+
+    def count(self, text):
         counts = {}
-        comments = []
         text = text.lower()
-        for i in range(len(text)):
-            sub = text[i:]
+        ind = -1
+
+        while ind is not 0:
             for word in self.words:
-                if sub.startswith(word["word"]):
+                if text.startswith(word["word"]):
                     if word["word"] not in counts:
                         counts[word["word"]] = { "count": 1, "response": word["response"] }
                     else:
                         counts[word["word"]]["count"] += 1
+            ind = text.find(" ") + 1
+            text = text[ind:]
+        return counts
 
-        return { "counts": counts, "comments": comments }
+    def comments(self, text):
+        comments = []
+        lowText = text.lower()
+
+        for phrase in self.phrases["phrases"]:
+            if "<" in phrase["phrase"] and ">" in phrase["phrase"]:
+                # do nlp
+                continue
+            elif phrase["phrase"] in lowText:
+                start = lowText.find(phrase["phrase"])
+                end = start + len(phrase["phrase"])
+                obj = { "start": start, "end": end, "suggestion": phrase["suggestion"]}
+                comments += [obj]
+
+        return comments
 
 if __name__ == '__main__':
     parser = Parser()
-    pprint(parser.parse("sorry think just just please sorry"))
+    pprint(parser.parse("Sorry thInk jUSt just I wonder if please sorry I think just wanted"))
