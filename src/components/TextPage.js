@@ -4,54 +4,10 @@ import './Styles.css'
 class TextPage extends Component {
     state ={
         entry: "",
-        analysisResults:{
-            'comments': [
-                {
-                    'end': 54,
-                    'start': 47,
-                    'suggestion': 'Consider removing this.'},
-                {
-                    'end': 66,
-                    'start': 55,
-                    'suggestion': "Consider removing the word 'just'."
-                },
-                {
-                    'end': 33,
-                    'start': 22,
-                    'suggestion': 'Consider removing this.'
-                }
-            ],
-            'counts': {
-                'just': {
-                    'count': 3,
-                    'response': 'This word comes across as passive or apologetic. Consider removing it.'
-                        },
-                'please': {'count': 1,
-                    'response': 'Using this word too often makes requests ' +
-                        'come across as optional. Be polite, but ' +
-                        'ask yourself whether you are requesting a ' +
-                        'favour or a work task.'
-                    },
-                'sorry': {
-                    'count': 2,
-                    'response': 'Check whether these are really things that ' +
-                                'you need to apologize for.'
-                },
-                'think': {'count': 2,
-                            'response': 'Are you confident in your ideas? If so ' +
-                                        'removing or replacing with alternatives ' +
-                                        "such as 'know', or 'am confident'."}},
-            'tone': [
-                {
-                    'score': 0.639146,
-                    'tone_id': 'polite',
-                    'tone_name': 'Polite'},
-                {
-                    'score': 0.80092,
-                    'tone_id': 'sympathetic',
-                    'tone_name': 'Sympathetic'
-                }
-            ]
+        analysisResults: {
+            'comments': [],
+            'counts': {},
+            'tone': []
         }
     }
 
@@ -93,23 +49,43 @@ class TextPage extends Component {
 
         xhr.send();
 
+        let that = this;
         xhr.onreadystatechange = (e) => {
             if (xhr.readyState === 4) {
-                this.state.analysisResults = xhr.responseText;
-                console.log(xhr.responseText);
+                that.stateSetter(xhr.responseText);
             }
         }
     }
 
+    stateSetter(str) {
+        this.setState({
+            analysisResults: str
+        })
+    }
+
     render() {
-        let output = <div />
+        let output = <div />;
+        let counts = <div />;
+        // let analysisLength = state.analysisResults.length - 1;
+        if (!this.state.analysisResults.counts.empty) {
+            let lines =[];
+
+            Object.entries(this.state.analysisResults.counts).forEach((k, v) =>
+            {
+                let text = "You have used the word " + k + k[1].count + " times. " + k[1].response;
+                lines.push(<p key={lines.length}>{text}</p>)
+            })
+            counts = (
+                <div>
+                    {lines}
+                </div>)
+        }
         if(this.state.analysisResults) {
             let comments = []
             if(this.state.analysisResults['comments']) {
                 this.state.analysisResults['comments'].forEach(elem =>{
                     comments.push(<p key={comments.length}>{elem.suggestion}</p>)
                 })
-                console.log(comments)
             }
             output = (
             <div>
@@ -122,8 +98,8 @@ class TextPage extends Component {
                     <textarea className="textarea textboxYellow" onChange={this.onChange} onSubmit={this.onSubmit} />
                 <a className="waves-effect btn darkYellow lighten-2 waves-light" onClick={this.onSubmit}>Analyze</a>
                 </div>
-                <div className="col s6">
-                    {output}
+                <div>
+                    {counts}
                 </div>
             </div>
         )
