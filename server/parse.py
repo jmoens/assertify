@@ -1,5 +1,4 @@
 from pprint import pprint
-import nltk
 import json
 
 class Parser():
@@ -36,9 +35,14 @@ class Parser():
         lowText = text.lower()
 
         for phrase in self.phrases["phrases"]:
-            if "<" in phrase["phrase"] and ">" in phrase["phrase"]:
-                # do nlp
-                continue
+            if phrase["type"] == "fill":
+                for p in self.phrases["passive"]:
+                    newPhrase = phrase["phrase"].replace("<passive>", p)
+                    if newPhrase in lowText:
+                        start = lowText.find(newPhrase)
+                        end = start + len(newPhrase)
+                        obj = { "start": start, "end": end, "suggestion": phrase["suggestion"]}
+                        comments += [obj]
             elif phrase["phrase"] in lowText:
                 start = lowText.find(phrase["phrase"])
                 end = start + len(phrase["phrase"])
