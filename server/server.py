@@ -23,7 +23,8 @@ class MyHandler(http.BaseHTTPRequestHandler):
         elif self.path.startswith("/res"):
             sid = int(self.path[5:])
             text = dataHandler.getText(sid)
-            res = parser.parse(text)
+            comments = parser.parse(text)
+            res = json.stringify(comments)
         else:
             res = "didnt understand request"
         self.wfile.write(res.encode("utf8"))
