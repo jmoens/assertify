@@ -88,7 +88,7 @@ class TextPage extends Component {
     }
 
     Highlight = ({children, highlightIndex}) => (
-        <Tooltip title={this.state.highlightingInfo[children]}>
+        <Tooltip title={<span className="tooltip">{this.state.highlightingInfo[children]}</span>} arrow="true">
             <mark className="highlighted-text">{children}</mark>
         </Tooltip>
     );
