@@ -68,13 +68,27 @@ class TextPage extends Component {
     render() {
         let output = <div/>;
         let counts = <div/>;
+        let moodData = []
+        let moods = ["frustrated", "sad", "satisfied", "excited", "polite", "impolite", "sympathetic"]
         let analysisLength = this.state.analysisResults.length - 1;
+        if(this.state.analysisResults[analysisLength]['tone']){
+            moods.forEach(mood => {
+                this.state.analysisResults[analysisLength]['tone'].forEach(result => {
+                    if(result.tone_id === mood && result.score >= 0.5){
+                        moodData.push( <div className="bold" key={moodData.length}>{mood}<i className="material-icons">check_box</i></div>)
+                    } else {
+                        moodData.push( <div key={moodData.length}>{mood} </div>)
+                    }
+                })
+            })
+        }
+
         if (this.state.analysisResults[analysisLength].counts) {
             let lines = [];
 
             Object.entries(this.state.analysisResults[analysisLength].counts).forEach((k, v) => {
-                let text = "You have used the word " + k[0] + " " + k[1].count + " times. " + k[1].response;
-                lines.push(<p key={lines.length}>{text}</p>)
+                let time = k[1].count > 1 ? "times" : "time"
+                lines.push(<p key={lines.length}>You have used the word <span className="red-text">{k[0]}</span> <span className="bold">{k[1].count}</span> {time}. {k[1].response}</p>)
             })
             counts = (
                 <div>
@@ -98,13 +112,19 @@ class TextPage extends Component {
                 <div className="container">
                     <div className="card col noborder">
                         <textarea className="textarea textboxYellow" onChange={this.onChange} onSubmit={this.onSubmit}/>
-                        <a className="waves-effect btn darkYellow lighten-2 waves-light"
-                           onClick={this.onSubmit}>Analyze</a>
+                        <div className="center-align"><a className="waves-effect btn darkYellow lighten-2 waves-light black-text"
+                           onClick={this.onSubmit}>Analyze</a></div>
                     </div>
-                </div>
-                <div>
+                    <div>
                     {counts}
                 </div>
+                <div className="bold underline">
+                    Analysis:
+                    
+                </div>
+                {moodData}
+                </div>
+                
             </div>
         )
     }
