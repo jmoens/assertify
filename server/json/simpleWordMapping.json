@@ -9,10 +9,10 @@
   },
   {
     "word": "please",
-    "response": "Using this word too often makes requests come across as optional. Be polite, but ask yourself whether you are requesting a favour or a work task."
+    "response": "Using this word makes requests appear optional. Ask yourself whether you are requesting a favour or a work task."
   },
   {
     "word": "might",
-    "response": ""
+    "response": "This word does not demonstrate confidence. Try alternatives like 'can' or 'will'."
   }
 ]
