@@ -1,57 +1,47 @@
 {
   "phrases": [
     {
-      "phrase": "maybe <pronoun> <verb>",
-      "suggestion": "Consider changing this to: <pro> <verb>"
+      "type": "exact",
+      "phrase": "maybe",
+      "suggestion": "Consider changing this."
     },
     {
-      "phrase": "I think <pro> <verb>",
-      "suggestion": "Consider changing this to: <pro> <verb>"
+      "type": "fill",
+      "phrase": "i <passive>",
+      "suggestion": "Consider removing this."
     },
     {
-      "phrase": "I <passive>",
-      "suggestion": " Consider removing this"
+      "type": "fill",
+      "phrase": "what do you <passive>",
+      "suggestion": "Consider changing this to: I am open to feedback."
     },
     {
-      "phrase": "what do you think",
-      "suggestion": "Consider changing this to: I am open to feedback"
-    },
-    {
+      "type": "exact",
       "phrase": "might be able",
-      "suggestion": "Consider changing this to: should be able"
+      "suggestion": "Consider changing this to: should be able."
     },
     {
-      "phrase": "just wanted",
-      "suggestion": "Consider changing this to: wanted"
+      "type": "fill",
+      "phrase": "just <passive>",
+      "suggestion": "Consider removing the word 'just'."
     },
     {
+      "type": "exact",
       "phrase": "sorry for bothering you",
       "suggestion": "Consider removing this."
     },
     {
-      "phrase": "I wonder if",
-      "suggestion": "TODO: Not really sure how to tackle this"
+      "type": "exact",
+      "phrase": "i wonder if",
+      "suggestion": "Consider removing this."
     }
-  ],
-  "pronoun": [
-    "I",
-    "you",
-    "we"
-  ],
-  "verb": [
-    "could",
-    "should",
-    "would",
-    "can"
   ],
   "passive": [
     "think",
     "feel",
     "feel like",
     "think that",
-    "believe"
-  ],
-  "responses": [
-    ""
+    "believe",
+    "wanted"
   ]
 }

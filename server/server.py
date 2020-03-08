@@ -32,13 +32,12 @@ class MyHandler(http.BaseHTTPRequestHandler):
     def do_PUT(self):
         """Respond to a PUT request."""
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-type", "text")
         self.end_headers()
         sid = int(self.path[1:])
         length = int(self.headers["Content-Length"])
         s = self.rfile.read(length).decode("utf8")
-        jobj = json.loads(s)
-        dataHandler.setText(sid, jobj["text"])
+        dataHandler.setText(sid, s)
         self.rfile.close()
 
 if __name__ == '__main__':
