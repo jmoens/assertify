@@ -1,16 +1,16 @@
 {
   "phrases": [
     {
-      "phrase": "maybe <pronoun> <verb>",
+      "phrase": "maybe <pro> <verb>",
       "suggestion": "Consider changing this to: <pro> <verb>"
     },
     {
-      "phrase": "I think <pro> <verb>",
+      "phrase": "i think <pro> <verb>",
       "suggestion": "Consider changing this to: <pro> <verb>"
     },
     {
-      "phrase": "I <passive>",
-      "suggestion": " Consider removing this"
+      "phrase": "i <passive>",
+      "suggestion": "Consider removing this"
     },
     {
       "phrase": "what do you think",
@@ -29,12 +29,18 @@
       "suggestion": "Consider removing this."
     },
     {
-      "phrase": "I wonder if",
+      "phrase": "i wonder if",
       "suggestion": "TODO: Not really sure how to tackle this"
     }
   ],
-  "pronoun": [
-    "I",
+  "tags": [
+    "pro",
+    "verb",
+    "passive",
+    "responses"
+  ],
+  "pro": [
+    "i",
     "you",
     "we"
   ],
