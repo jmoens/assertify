@@ -23,8 +23,10 @@ class MyHandler(http.BaseHTTPRequestHandler):
             res = str(dataHandler.getSid())
         elif self.path.startswith("/res"):
             sid = int(self.path[5:])
-            text = dataHandler.getText(sid)
-            comments = parser.parse(text)
+            texts = dataHandler.getTexts(sid)
+            comments = []
+            for text in texts[-min(len(texts), 5):]:
+                comments += [parser.parse(text)]
             res = json.dumps(comments)
         else:
             res = "didnt understand request"

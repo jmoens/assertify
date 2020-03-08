@@ -3,14 +3,14 @@ class DataHandler():
         self.next_sid = 0
         self.dict = {}
 
-    def getText(self, sid):
-        return self.dict[sid]
-
     def setText(self, sid, text):
-        self.dict[sid] = text
+        self.dict[sid] += [text]
+
+    def getTexts(self, sid):
+        return self.dict[sid]
 
     def getSid(self):
         sid = self.next_sid
         self.next_sid += 1
-        self.dict[sid] = ""
+        self.dict[sid] = []
         return sid
