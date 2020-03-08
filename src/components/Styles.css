@@ -59,6 +59,18 @@ li{
     font-size: 16px;
 }
 
+.test{
+    width: 45%
+}
+
+.border{
+    border-style: solid;
+    border-width: thin;
+    border-color:  #1B1B1B;
+    height: 400px;
+    margin: 10px;
+}
+
 .list{
     font-size: 16px;
 }

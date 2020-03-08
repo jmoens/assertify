@@ -6,6 +6,7 @@ class TextPage extends Component {
     state = {
         entry: "",
         previousEntry: "",
+        searchTerms: [],
         analysisResults: [{
             'comments': [],
             'counts': {},
@@ -59,6 +60,7 @@ class TextPage extends Component {
         xhr.onreadystatechange = (e) => {
             if (xhr.readyState === 4) {
                 that.stateSetter(JSON.parse(xhr.responseText));
+                that.setSearchTerms();
             }
         }
     }
@@ -68,6 +70,18 @@ class TextPage extends Component {
             analysisResults: str
         })
     };
+
+    setSearchTerms() {
+        let terms = [];
+        let analysisLength = this.state.analysisResults.length - 1;
+        this.state.analysisResults[analysisLength]['comments'].forEach(elem => {
+                terms.push(this.state.previousEntry.slice(elem.start, elem.end))
+            }
+        )
+        this.setState({
+            searchTerms: terms
+        })
+    }
 
     render() {
         let output = <div/>;
@@ -116,7 +130,7 @@ class TextPage extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="card col s6 noborder">
+                    <div className="card col test noborder">
                         <textarea
                             className="textarea textboxYellow"
                             name='searchTerms'
@@ -128,10 +142,10 @@ class TextPage extends Component {
                                onClick={this.onSubmit}>Analyze</a>
                         </div>
                     </div>
-                    <div className="card col s6">
+                    <div className="card col test border">
                         <Highlighter
                             highlightStyle={{fontWeight: 'normal'}}
-                            searchWords={["the", "where", "think", "sorry"]}
+                            searchWords={this.state.searchTerms}
                             textToHighlight={this.state.previousEntry}
                         />
                     </div>
